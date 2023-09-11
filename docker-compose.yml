@@ -34,7 +34,7 @@ services:
     ports:
       - 3000:3000
     environment:
-      - SERVER_HOST=http://server:4000
+      - REACT_APP_SERVER_HOST=http://server:4000
     volumes:
       - ./client/src:/app/client/src
       - ./client/package.json:/app/client/package.json
