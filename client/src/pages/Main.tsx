@@ -11,12 +11,13 @@ interface Post {
 function TestPage() {
   const [posts, setPosts] = useState<Post[]>([])
 
-  const serverHost = process.env.REACT_APP_SERVER_HOST
-
+  const serverHost = process.env.REACT_APP_SERVER_HOST as string
+  console.log(serverHost)
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(process.env.SERVER_HOST)
+        const response = await fetch(serverHost)
+        console.log(1)
         if (!response.ok) {
           throw new Error('Network response was not ok')
         }
@@ -28,7 +29,7 @@ function TestPage() {
     }
 
     fetchData()
-  }, [])
+  }, [serverHost])
 
   return (
     <Container>

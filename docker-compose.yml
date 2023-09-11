@@ -1,13 +1,13 @@
 version: '3.9'
 services:
-  server:
+  test-server:
     platform: linux/amd64
     build:
       context: ./
       dockerfile: ./Dockerfile.dev
       args:
         TARGET: server
-    container_name: server
+    container_name: test-server
     command: sh -c "cd server && npm run start:dev"
     env_file:
       - server/.env
@@ -24,17 +24,19 @@ services:
       - ./server/package.json:/app/server/package.json
       - ./server/nest-cli.json:/app/server/nest-cli.json
       - ./server/.env:/app/server/.env
-  client:
+    extra_hosts:
+      - 'host.docker.internal:host-gateway'
+  test-client:
     build:
       context: ./
       dockerfile: ./Dockerfile.dev
       args:
         TARGET: client
-    container_name: client
+    container_name: test-client
     ports:
       - 3000:3000
     environment:
-      - REACT_APP_SERVER_HOST=http://server:4000
+      - REACT_APP_SERVER_HOST=http://test-server:4000
     volumes:
       - ./client/src:/app/client/src
       - ./client/package.json:/app/client/package.json
