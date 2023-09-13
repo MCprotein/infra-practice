@@ -3,6 +3,9 @@ FROM node:16.20-slim
 ARG TARGET
 ENV TARGET=${TARGET}
 
+ARG REACT_APP_SERVER_HOST
+ENV REACT_APP_SERVER_HOST=${REACT_APP_SERVER_HOST}
+
 RUN apt-get update
 RUN apt-get install -y procps
 
@@ -11,5 +14,9 @@ WORKDIR /app
 COPY ./${TARGET} /app/${TARGET}
 
 RUN cd ${TARGET} && npm ci
+
+RUN if [ "$TARGET" = "client" ]; then \
+      cd ${TARGET} && npm pkg set 'proxy'="$REACT_APP_SERVER_HOST";\
+    fi
 
 CMD cd ${TARGET} && npm start

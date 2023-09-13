@@ -32,6 +32,7 @@ services:
       dockerfile: ./Dockerfile.dev
       args:
         TARGET: client
+        REACT_APP_SERVER_HOST: http://test-server:4000
     container_name: test-client
     ports:
       - 3000:3000
@@ -39,6 +40,6 @@ services:
       - REACT_APP_SERVER_HOST=http://test-server:4000
     volumes:
       - ./client/src:/app/client/src
-      - ./client/package.json:/app/client/package.json
+      # - ./client/package.json:/app/client/package.json
     depends_on:
       - test-server
