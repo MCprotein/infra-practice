@@ -1,0 +1,16 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "chrome",
+      "request": "launch",
+      "name": "리액트",
+      "url": "http://localhost:3000",
+      "webRoot": "${workspaceFolder}/client",
+      "cwd": "${workspaceFolder}/client",
+      "sourceMapPathOverrides": {
+        "webpack:///src/*": "${webRoot}/src/*"
+      }
+    }
+  ]
+}

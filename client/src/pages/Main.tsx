@@ -16,11 +16,14 @@ function TestPage() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(serverHost)
-        console.log(1)
+        const response = await fetch('api/test', {
+          method: 'GET'
+        })
+
         if (!response.ok) {
           throw new Error('Network response was not ok')
         }
+        console.log(response)
         const data = await response.json()
         setPosts(data)
       } catch (error) {

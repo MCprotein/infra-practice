@@ -40,3 +40,5 @@ services:
     volumes:
       - ./client/src:/app/client/src
       - ./client/package.json:/app/client/package.json
+    depends_on:
+      - test-server
