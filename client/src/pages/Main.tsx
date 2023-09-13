@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
+import axios from 'axios'
 
 interface Post {
   userId: number
@@ -16,16 +17,19 @@ function TestPage() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('api/test', {
-          method: 'GET'
-        })
-
-        if (!response.ok) {
-          throw new Error('Network response was not ok')
-        }
+        const response = await axios.get('/test')
         console.log(response)
-        const data = await response.json()
-        setPosts(data)
+
+        // const response = await fetch('api/test', {
+        //   method: 'GET'
+        // })
+
+        // if (!response.ok) {
+        //   throw new Error('Network response was not ok')
+        // }
+
+        // const data = await response.json()
+        setPosts(response.data)
       } catch (error) {
         console.error((error as Error).message)
       }
