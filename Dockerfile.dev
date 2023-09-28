@@ -15,6 +15,7 @@ COPY ./${TARGET} /app/${TARGET}
 
 RUN cd ${TARGET} && npm ci
 
+# REACT PROXY DYNAMIC SETTING
 RUN if [ "$TARGET" = "client" ]; then \
       cd ${TARGET} && npm pkg set 'proxy'="$REACT_APP_SERVER_HOST";\
     fi

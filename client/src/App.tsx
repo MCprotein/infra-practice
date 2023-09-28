@@ -1,8 +1,8 @@
-import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import TestPage from "./pages/Main";
-import ApiPage from "./pages/Api";
-import NotFound from "./pages/NotFound";
+import React from 'react'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import TestPage from './pages/Main'
+import ApiPage from './pages/Api'
+import NotFound from './pages/NotFound'
 function App() {
   return (
     <BrowserRouter>
@@ -13,7 +13,7 @@ function App() {
         <Route path="*" element={<NotFound />}></Route>
       </Routes>
     </BrowserRouter>
-  );
+  )
 }
 
-export default App;
+export default App
