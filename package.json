@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "scripts": {
     "start": "docker compose up --build=${npm_config_build:-false} --detach=${npm_config_detach:-false}",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "docker:login": "docker login -u chss3339 --password shyun100100~",
+    "docker:build": "docker build -t chss3339/infra:$npm_package_name-$npm_package_version -f Dockerfile --network host .",
+    "docker:push": "timestamp=$(date \"+%Y%m%d%H%M%S\"); commit=$(git rev-parse --short HEAD); docker tag chss3339/infra:$npm_package_name-$npm_package_version chss3339/infra:$timestamp-$commit; docker push chss3339/infra:$timestamp-$commit;"
   },
   "repository": {
     "type": "git",
