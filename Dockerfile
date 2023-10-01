@@ -15,20 +15,18 @@ FROM node:16.20.0 AS server
 
 WORKDIR /build/server
 
-COPY ./server/package.json /build/server/
-COPY ./server/package-lock.json /build/server/
+COPY ./server /build/server/
 
-RUN npm ci --silent --omit=dev
+RUN npm ci --silent && npm run build
 
 FROM node:16.20-slim
 
-WORKDIR /app/server
-
-COPY ./server /app/server
-
 COPY --from=client /build/client/build /app/client/build
+
+COPY --from=server /build/server/dist /app/server/dist
 COPY --from=server /build/server/node_modules/ /app/server/node_modules
 
 WORKDIR /app
 
-CMD node server/main.js
+CMD node server/dist/main.js
+
